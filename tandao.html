@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Tandao Sports and Entertainment</title>
+    <meta name="description" content="Tandao TV - Your source for the latest sports and entertainment news in Kenya. Stay updated with Tandao Television's vibrant programming and youth-focused media." />
+    <meta name="keywords" content="Tandao TV, Tandao Television, sports news, entertainment news, Kenyan media, youth media, Kenyan TV" />
+    <link rel="stylesheet" href="tandao.css" />
+    <style>
+        /* Added styles for post form */
+        #postFormSection {
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            padding: 15px;
+            background-color: #f9f9f9;
+        }
+        #postFormSection textarea {
+            width: 100%;
+            height: 100px;
+            margin-bottom: 10px;
+        }
+        #postFormSection input[type="file"],
+        #postFormSection input[type="text"] {
+            display: block;
+            margin-bottom: 10px;
+            width: 100%;
+        }
+        #categoryButtons button {
+            margin-right: 10px;
+            padding: 8px 16px;
+            cursor: pointer;
+        }
+    </style>
+    <style>
+        /* Modal styles for image enlarge */
+        #imageModal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            padding-top: 60px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.8);
+        }
+        #imageModalContent {
+            margin: auto;
+            display: block;
+            max-width: 80%;
+            max-height: 80%;
+            box-shadow: 0 0 15px #fff;
+        }
+        #imageModalClose {
+            position: absolute;
+            top: 30px;
+            right: 35px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Navbar -->
+        <div class="navbar">
+<img src="tandao_logo.png.jpeg"Tandao Television Logo" style="max-height: 60px; width: auto;" />
+            <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#sports">Sports</a></li>
+            <li><a href="#entertainment">Entertainment</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+            </nav>
+        </div>
+
+        <!-- Home Section -->
+        <div id="home" class="hero">
+            <h1>Welcome to Tandao Sports and Entertainment</h1>
+            <p>Discover the latest in sports and entertainment from Tandao Television.</p>
+            <a href="#about">Learn More</a>
+        </div>
+
+        <!-- About Section -->
+
+        <!-- Category Buttons for Admin Posting -->
+-
+-        <!-- Post Form Section (Hidden by Default) -->
+-        <div id="postFormSection" style="display:none;">
+-            <h2>Post Update</h2>
+-            <textarea id="updateContent" placeholder="Write your update here..."></textarea>
+-            <input type="file" id="updateImage" accept="image/*" />
+-            <input type="text" id="imageCaption" placeholder="Enter image caption" style="display:none; margin-top: 5px;" />
+-            <button id="postUpdateBtn">Post Update</button>
+-        </div>
+        <!-- Category Buttons for Admin Posting -->
+
+        <!-- Post Form Section (Hidden by Default) -->
+        <div id="postFormSection" style="display:none;">
+            <h2>Post Update</h2>
+            <textarea id="updateContent" placeholder="Write your update here..."></textarea>
+            <input type="file" id="updateImage" accept="image/*" />
+            <input type="text" id="imageCaption" placeholder="Enter image caption" style="display:none; margin-top: 5px;" />
+            <button id="postUpdateBtn">Post Update</button>
+        </div>
+
+        <!-- Sports Section -->
+        <section id="sports" class="section">
+            <h2>Sports Coverage</h2>
+            <p>Stay updated with the latest sports news, live matches, and in-depth analysis. Tandao Sports is your go-to source for all things sports!</p>
+            <div id="postFormSports" style="display:none; margin-top: 10px; border: 1px solid #ccc; padding: 10px; background-color: #f9f9f9;">
+                <textarea id="updateContentSports" placeholder="Write your sports update here..." style="width: 100%; height: 100px; margin-bottom: 10px;"></textarea>
+                <input type="file" id="updateImageSports" accept="image/*" style="display: block; margin-bottom: 10px; width: 100%;" />
+                <input type="text" id="imageCaptionSports" placeholder="Enter image caption" style="display:none; margin-top: 5px; width: 100%;" />
+            </div>
+            <div id="sports-updates"></div>
+        </section>
+
+        <!-- Entertainment Section -->
+        <section id="entertainment" class="section">
+            <h2>Entertainment Updates</h2>
+            <p>Catch up on the hottest entertainment stories, celebrity news, and exclusive interviews. Tandao Entertainment keeps you in the know!</p>
+            <div id="postFormEntertainment" style="display:none; margin-top: 10px; border: 1px solid #ccc; padding: 10px; background-color: #f9f9f9;">
+                <textarea id="updateContentEntertainment" placeholder="Write your entertainment update here..." style="width: 100%; height: 100px; margin-bottom: 10px;"></textarea>
+                <input type="file" id="updateImageEntertainment" accept="image/*" style="display: block; margin-bottom: 10px; width: 100%;" />
+                <input type="text" id="imageCaptionEntertainment" placeholder="Enter image caption" style="display:none; margin-top: 5px; width: 100%;" />
+            </div>
+            <div id="entertainment-posts"></div>
+        </section>
+
+        <!-- About Us Section -->
+        <section id="about" class="section">
+            <h2>About Tandao TV &amp; Our Founder</h2>
+            <p>Tandao TV is a dynamic, youth-focused media channel in Kenya offering vibrant programming that bridges the gap between digital innovation and traditional broadcasting. We are driven by a passion to inform, entertain, and empower our audience with relevant, high-quality content in both English and Kiswahili.</p>
+            <p><strong>Meet Our CEO – Robert Wanyonyi</strong><br/>
+            Investigative journalist turned visionary media leader: Robert began his career uncovering stories that matter and seamlessly transitioned into leadership to shape the future of Kenyan media.</p>
+            <p>Founder &amp; Group CEO of Tandao Media Group: He leads with purpose, merging editorial integrity with digital growth to ensure Tandao remains ethically sound, innovative, and audience-centric.</p>
+            <p>Hands-on newsroom presence: Known to visit the newsroom multiple times daily, Robert ensures our reporting stays honest, unbiased, and free from undue influence.</p>
+            <p>Digital-savvy &amp; socially responsible: He highlights the importance of platforms like TikTok, YouTube, and Instagram in youth engagement, while championing responsible use and digital literacy through civic education efforts.</p>
+            <p>International correspondent for Reuters: In a collaboration facilitated by Thomson Reuters, Robert now reports on critical East and Central Africa issues—ranging from regional integration to geopolitical developments—extending Tandao’s reach to global audiences.</p>
+            <p><strong>Why Tandao TV Stands Out</strong><br/>
+            Editorial independence &amp; ethics: Under Robert’s guidance, our newsroom is vigilant against advertiser or government influence, upholding integrity as our core value.</p>
+            <p>Content that resonates: We cater to the digitally connected youth, blending trending online culture with in-depth traditional journalism and storytelling.</p>
+            <p>Community at heart: From our “Shinda Shopping” viewer competition to socially engaging programming, we support our communities and uplift our audiences.</p>
+            <p>In a nutshell: Under Robert Wanyonyi’s leadership, Tandao TV isn’t just another channel—it’s a forward-thinking media platform championing ethical journalism, youth empowerment, and digital engagement. Join us for smart, engaging content that informs, inspires, and uplifts.</p>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section">
+            <h2>Contact Us: Hotline number +254701066991</h2>
+            <p>Have questions or feedback? Reach out to us at FB/IG: TANDAOTV KENYA <a href="mailto:tandaomediagroup@gmail.com">tandaomediagroup@gmail.com</a>.</p>
+        </section>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>&copy; 2025 Tandao Television. All Rights Reserved.</p>
+        </div>
+    </div>
+
+    <!-- Image Modal -->
+    <div id="imageModal" style="display:none;">
+        <span id="imageModalClose">&times;</span>
+        <img id="imageModalContent" alt="Enlarged Image" />
+    </div>
+
+    <script src="admin.js"></script>
+    <script>
+        // Fetch and render updates from backend API
+        async function renderUpdates() {
+            try {
+                const response = await fetch('/api/updates');
+                const updates = await response.json();
+
+                const sportsContainer = document.getElementById("sports-updates");
+                const entertainmentContainer = document.getElementById("entertainment-posts");
+
+                if (sportsContainer) {
+                    sportsContainer.innerHTML = "";
+                    updates.sports.forEach((update) => {
+                        const div = document.createElement("div");
+                        div.className = "update";
+
+                        const textP = document.createElement("p");
+                        textP.textContent = update.text;
+                        div.appendChild(textP);
+
+                        if (update.image) {
+                            const img = document.createElement("img");
+                            img.src = update.image;
+                            img.alt = "Update Image";
+                            img.style.maxWidth = "200px";
+                            img.style.display = "block";
+                            img.style.cursor = "pointer";
+                            img.addEventListener("click", () => {
+                                openModal(update.image);
+                            });
+                            div.appendChild(img);
+                        }
+
+                        sportsContainer.appendChild(div);
+                    });
+                }
+
+                if (entertainmentContainer) {
+                    entertainmentContainer.innerHTML = "";
+                    updates.entertainment.forEach((update) => {
+                        const div = document.createElement("div");
+                        div.className = "update";
+
+                        const textP = document.createElement("p");
+                        textP.textContent = update.text;
+                        div.appendChild(textP);
+
+                        if (update.image) {
+                            const img = document.createElement("img");
+                            img.src = update.image;
+                            img.alt = "Update Image";
+                            img.style.maxWidth = "200px";
+                            img.style.display = "block";
+                            img.style.cursor = "pointer";
+                            img.addEventListener("click", () => {
+                                openModal(update.image);
+                            });
+                            div.appendChild(img);
+                        }
+
+                        entertainmentContainer.appendChild(div);
+                    });
+                }
+            } catch (error) {
+                console.error('Error fetching updates:', error);
+            }
+        }
+
+        // Modal functionality
+        const modal = document.getElementById("imageModal");
+        const modalImg = document.getElementById("imageModalContent");
+        const closeBtn = document.getElementById("imageModalClose");
+
+        function openModal(imageSrc) {
+            modal.style.display = "block";
+            modalImg.src = imageSrc;
+        }
+
+        function closeModal() {
+            modal.style.display = "none";
+            modalImg.src = "";
+        }
+
+        closeBtn.addEventListener("click", closeModal);
+
+        modal.addEventListener("click", (event) => {
+            if (event.target === modal) {
+                closeModal();
+            }
+        });
+
+        // Show or hide image caption input based on image selection for sports
+        const imageInputSports = document.getElementById("updateImageSports");
+        const captionInputSports = document.getElementById("imageCaptionSports");
+
+        if (imageInputSports && captionInputSports) {
+            imageInputSports.addEventListener("change", (event) => {
+                if (event.target.files && event.target.files.length > 0) {
+                    captionInputSports.style.display = "block";
+                } else {
+                    captionInputSports.style.display = "none";
+                    captionInputSports.value = "";
+                }
+            });
+        }
+
+        // Show or hide image caption input based on image selection for entertainment
+        const imageInputEntertainment = document.getElementById("updateImageEntertainment");
+        const captionInputEntertainment = document.getElementById("imageCaptionEntertainment");
+
+        if (imageInputEntertainment && captionInputEntertainment) {
+            imageInputEntertainment.addEventListener("change", (event) => {
+                if (event.target.files && event.target.files.length > 0) {
+                    captionInputEntertainment.style.display = "block";
+                } else {
+                    captionInputEntertainment.style.display = "none";
+                    captionInputEntertainment.value = "";
+                }
+            });
+        }
+
+        // Show/hide post forms
+        function showPostFormSports() {
+            document.getElementById("postFormSports").style.display = "block";
+            document.getElementById("postFormEntertainment").style.display = "none";
+            clearSportsForm();
+        }
+
+        function showPostFormEntertainment() {
+            document.getElementById("postFormEntertainment").style.display = "block";
+            document.getElementById("postFormSports").style.display = "none";
+            clearEntertainmentForm();
+        }
+
+        function clearSportsForm() {
+            document.getElementById("updateContentSports").value = "";
+            document.getElementById("updateImageSports").value = "";
+            document.getElementById("imageCaptionSports").value = "";
+            document.getElementById("imageCaptionSports").style.display = "none";
+        }
+
+        function clearEntertainmentForm() {
+            document.getElementById("updateContentEntertainment").value = "";
+            document.getElementById("updateImageEntertainment").value = "";
+            document.getElementById("imageCaptionEntertainment").value = "";
+            document.getElementById("imageCaptionEntertainment").style.display = "none";
+        }
+
+        // Post update functions for sports and entertainment
+        function postSportsUpdate() {
+            const content = document.getElementById("updateContentSports").value;
+            const imageInput = document.getElementById("updateImageSports");
+            const captionInput = document.getElementById("imageCaptionSports");
+            let imageData = "";
+            let caption = "";
+
+            if (content.trim() === "") {
+                alert("Update content cannot be empty!");
+                return;
+            }
+
+            if (imageInput.files && imageInput.files[0]) {
+                caption = captionInput.value.trim();
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    imageData = e.target.result;
+                    saveUpdate("sports", content, imageData, caption, {
+                        contentId: "updateContentSports",
+                        imageId: "updateImageSports",
+                        captionId: "imageCaptionSports"
+                    });
+                    clearSportsForm();
+                    renderUpdates();
+                    document.getElementById("postFormSports").style.display = "none";
+                };
+                reader.readAsDataURL(imageInput.files[0]);
+            } else {
+                saveUpdate("sports", content, imageData, caption, {
+                    contentId: "updateContentSports",
+                    imageId: "updateImageSports",
+                    captionId: "imageCaptionSports"
+                });
+                clearSportsForm();
+                renderUpdates();
+                document.getElementById("postFormSports").style.display = "none";
+            }
+        }
+
+        function postEntertainmentUpdate() {
+            const content = document.getElementById("updateContentEntertainment").value;
+            const imageInput = document.getElementById("updateImageEntertainment");
+            const captionInput = document.getElementById("imageCaptionEntertainment");
+            let imageData = "";
+            let caption = "";
+
+            if (content.trim() === "") {
+                alert("Update content cannot be empty!");
+                return;
+            }
+
+            if (imageInput.files && imageInput.files[0]) {
+                caption = captionInput.value.trim();
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    imageData = e.target.result;
+                    saveUpdate("entertainment", content, imageData, caption, {
+                        contentId: "updateContentEntertainment",
+                        imageId: "updateImageEntertainment",
+                        captionId: "imageCaptionEntertainment"
+                    });
+                    clearEntertainmentForm();
+                    renderUpdates();
+                    document.getElementById("postFormEntertainment").style.display = "none";
+                };
+                reader.readAsDataURL(imageInput.files[0]);
+            } else {
+                saveUpdate("entertainment", content, imageData, caption, {
+                    contentId: "updateContentEntertainment",
+                    imageId: "updateImageEntertainment",
+                    captionId: "imageCaptionEntertainment"
+                });
+                clearEntertainmentForm();
+                renderUpdates();
+                document.getElementById("postFormEntertainment").style.display = "none";
+            }
+        }
+
+        // Event listeners for buttons
+        // Removed event listeners for post update buttons on tandao.html as buttons are removed
+
+        // Render updates on page load
+        document.addEventListener("DOMContentLoaded", () => {
+            renderUpdates();
+            document.getElementById("postFormSports").style.display = "none";
+            document.getElementById("postFormEntertainment").style.display = "none";
+        });
+
+        // Optional: Listen for storage events to update live if multiple tabs are open
+        window.addEventListener("storage", (event) => {
+            if (event.key === "updates") {
+                renderUpdates();
+            }
+        });
+
+        // Scroll to top on page load
+        window.onload = function() {
+            window.scrollTo(0, 0);
+        };
+    </script>
+</body>
+</html>

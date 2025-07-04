@@ -1,0 +1,128 @@
+input[type="password"],
+textarea,
+select {
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #222;
+    color: #f0f0f0;
+}
+
+#loginSection {
+    background: #1a1a1a;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #ff6600;
+}
+
+#loginSection h2 {
+    color: #ff6600;
+    margin-bottom: 15px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+#postFormSection {
+    margin-bottom: 20px;
+    background: #1a1a1a;
+    padding: 20px;
+    border-radius: 10px;
+    color: #f0f0f0;
+}
+
+#postFormSection h2 {
+    color: #ff6600;
+    margin-bottom: 15px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+#currentUpdatesSection {
+    background: #1a1a1a;
+    padding: 20px;
+    border-radius: 10px;
+    color: #f0f0f0;
+}
+
+#currentUpdatesSection h2 {
+    color: #ff6600;
+    margin-bottom: 15px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+button {
+    background: linear-gradient(45deg, red, orange);
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    margin-top: 10px;
+}
+
+button:hover {
+    background: #ff6600;
+}
+
+#postUpdateBtn {
+    outline: none;
+    border: none;
+    box-shadow: none;
+}
+
+#postUpdateBtn:focus,
+#postUpdateBtn:active {
+    outline: none;
+    box-shadow: none;
+    border: none;
+}
+
+/* Modal styles */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1000; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.8); /* Black w/ opacity */
+}
+
+.modal-content {
+    margin: 5% auto;
+    display: block;
+    max-width: 90%;
+    max-height: 80vh;
+    border-radius: 10px;
+    box-shadow: 0 0 15px #fff;
+}
+
+.close {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    color: #fff;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    user-select: none;
+    transition: color 0.3s ease;
+}
+
+.close:hover,
+.close:focus {
+    color: #bbb;
+}

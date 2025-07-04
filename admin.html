@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Admin Panel - Tandao</title>
+    <link rel="stylesheet" href="admin.css" />
+</head>
+<body>
+    <div class="container">
+        <h1>Admin Panel</h1>
+
+        <!-- Login Section -->
+        <div id="loginSection">
+            <h2>Admin Login</h2>
+            <input type="password" id="adminPassword" placeholder="Enter Admin Password" />
+            <button onclick="checkPassword()">Login</button>
+        </div>
+
+        <!-- Post Form Section (Hidden by Default) -->
+        <div id="postFormSection" style="display: none;">
+            <h2>Post Updates</h2>
+            <select id="category">
+                <option value="sports">Sports</option>
+                <option value="entertainment">Entertainment</option>
+            </select>
+            <textarea id="updateContent" placeholder="Write your update here..."></textarea>
+            <input type="file" id="updateImage" accept="image/*" />
+            <input type="text" id="imageCaption" placeholder="Enter image caption" style="display:none; margin-top: 5px;" />
+            <button id="postUpdateBtn" type="button">Post Update</button>
+        </div>
+
+        <!-- Current Updates Section -->
+        <div id="currentUpdatesSection" style="display: none;">
+            <h2>Current Updates</h2>
+            <div id="updatesList"></div>
+        </div>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>

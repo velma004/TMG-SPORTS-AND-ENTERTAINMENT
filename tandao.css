@@ -1,0 +1,246 @@
+/* tandao.css */
+
+/* General reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #111;
+    color: white;
+    scroll-behavior: smooth;
+}
+
+/* Container styling */
+.container {
+    width: 100%;
+    min-height: 100vh;
+    background-image: url('background.jpg'); /* Placeholder for the background image */
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+/* Navbar styling */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 50px;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 10;
+}
+
+.container {
+    padding-top: 70px; /* Adjust based on navbar height */
+}
+
+.logo {
+    max-width: 150px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px 15px;
+    background: linear-gradient(45deg, red, orange);
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+nav ul li a:hover {
+    background: white;
+    color: black;
+}
+
+/* Hero Section */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+}
+
+.hero h1 {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    animation: fadeInDown 2s ease-in-out;
+}
+
+.hero p {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+    animation: fadeInUp 2s ease-in-out;
+}
+
+.hero a {
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px 20px;
+    background: linear-gradient(45deg, red, orange);
+    border: 2px solid white;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.hero a:hover {
+    background: white;
+    color: black;
+}
+
+/* Footer */
+.footer {
+    position: relative;
+    bottom: auto;
+    width: 100%;
+    text-align: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.footer p {
+    font-size: 14px;
+    color: #aaa;
+}
+
+/* Animations */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    nav ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+    }
+}
+
+/* About Us Section Styling */
+#about h2 {
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: #ff6600;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+#about p {
+    margin-bottom: 15px;
+    line-height: 1.6;
+    font-size: 1.1rem;
+    color: #f0f0f0;
+}
+
+#about strong {
+    font-size: 1.3rem;
+    color: #ffa500;
+    display: block;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+/* Sports and Entertainment Section Styling */
+#sports h2,
+#entertainment h2 {
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: #ff6600;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+#sports p,
+#entertainment p {
+    margin-bottom: 15px;
+    line-height: 1.6;
+    font-size: 1.1rem;
+    color: #f0f0f0;
+}
+
+/* Contact Section Styling */
+#contact h2 {
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: #ff6600;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+#contact p {
+    margin-bottom: 15px;
+    line-height: 1.6;
+    font-size: 1.1rem;
+    color: #f0f0f0;
+}
+
+/* Posted Updates Styling */
+.update {
+    background-color: rgba(255, 102, 0, 0.1);
+    border-left: 5px solid #ff6600;
+    padding: 10px 15px;
+    margin-bottom: 15px;
+    font-size: 1.15rem;
+    color: #fff5e6;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    border-radius: 4px;
+}
+
+.update p {
+    margin: 0;
+}

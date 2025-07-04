@@ -1,0 +1,38 @@
+/* Styles for Twitter-like text updates */
+.twitter-update {
+    background-color: #e8f5fd;
+    border: 1px solid #1da1f2;
+    border-radius: 10px;
+    padding: 10px 15px;
+    margin-bottom: 15px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #14171a;
+    max-width: 600px;
+    box-shadow: 0 2px 4px rgba(29, 161, 242, 0.2);
+}
+
+/* Styles for Instagram-like image updates */
+.instagram-update {
+    background-color: #fff;
+    border: 1px solid #dbdbdb;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 20px;
+    max-width: 600px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    font-family: Arial, sans-serif;
+    color: #262626;
+}
+
+.instagram-update img {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 8px;
+}
+
+.instagram-caption {
+    font-style: italic;
+    color: #999;
+    font-size: 14px;
+    padding-left: 5px;
+}
