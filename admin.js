@@ -40,56 +40,35 @@ function addUpdate() {
     }
 }
 
-async function saveUpdate(category, content, imageData, caption, clearInputs = {}) {
-    try {
-        const response = await fetch('/api/updates', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ category, text: content, image: imageData, caption })
-        });
-        if (!response.ok) {
-            // Try to get error message from response body
-            let errorMessage = 'Failed to post update';
-            try {
-                const errorData = await response.json();
-                if (errorData && errorData.error) {
-                    errorMessage = errorData.error;
-                }
-            } catch (e) {
-                // ignore JSON parse errors
-            }
-            throw new Error(errorMessage);
-        }
-        alert("Update posted successfully!");
+function saveUpdate(category, content, imageData, caption, clearInputs = {}) {
+    // Save update locally in localStorage since no backend
+    let updates = JSON.parse(localStorage.getItem("updates")) || { sports: [], entertainment: [] };
 
-        // Fetch latest updates from server to sync localStorage and UI
-        const updatesResponse = await fetch('/api/updates');
-        if (!updatesResponse.ok) {
-            throw new Error('Failed to fetch updates after posting');
-        }
-        const updatesData = await updatesResponse.json();
-        localStorage.setItem("updates", JSON.stringify(updatesData));
-
-        // Clear the textarea, file input, and caption input if provided
-        if (clearInputs.contentId) {
-            const contentElem = document.getElementById(clearInputs.contentId);
-            if (contentElem) contentElem.value = "";
-        }
-        if (clearInputs.imageId) {
-            const imageElem = document.getElementById(clearInputs.imageId);
-            if (imageElem) imageElem.value = "";
-        }
-        if (clearInputs.captionId) {
-            const captionElem = document.getElementById(clearInputs.captionId);
-            if (captionElem) captionElem.value = "";
-        }
-
-        renderUpdatesList();
-    } catch (error) {
-        alert("Error posting update: " + error.message);
+    if (!updates[category]) {
+        updates[category] = [];
     }
+
+    updates[category].push({ text: content, image: imageData, caption });
+
+    localStorage.setItem("updates", JSON.stringify(updates));
+
+    alert("Update saved locally!");
+
+    // Clear the textarea, file input, and caption input if provided
+    if (clearInputs.contentId) {
+        const contentElem = document.getElementById(clearInputs.contentId);
+        if (contentElem) contentElem.value = "";
+    }
+    if (clearInputs.imageId) {
+        const imageElem = document.getElementById(clearInputs.imageId);
+        if (imageElem) imageElem.value = "";
+    }
+    if (clearInputs.captionId) {
+        const captionElem = document.getElementById(clearInputs.captionId);
+        if (captionElem) captionElem.value = "";
+    }
+
+    renderUpdatesList();
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -113,7 +92,24 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    renderUpdatesList();
+    // On load, if no updates in localStorage, fetch from updates.json
+    if (!localStorage.getItem("updates")) {
+        fetch('updates.json')
+            .then(response => {
+                if (!response.ok) throw new Error('Failed to load updates.json');
+                return response.json();
+            })
+            .then(data => {
+                localStorage.setItem("updates", JSON.stringify(data));
+                renderUpdatesList();
+            })
+            .catch(error => {
+                console.error(error);
+                renderUpdatesList();
+            });
+    } else {
+        renderUpdatesList();
+    }
 });
 
 function renderUpdatesList() {
