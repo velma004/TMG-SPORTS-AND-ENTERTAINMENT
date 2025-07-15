@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tandao Sports and Entertainment</title>
+    <link rel="stylesheet" href="../tandao.css" />
+    <link rel="stylesheet" href="../tmg.css" />
+</head>
+<body>
+    <div class="container">
+        <!-- Navbar -->
+        <div class="navbar">
+            <img src="../tandao_logo.png.jpeg" class="logo" alt="Tandao Television Logo" />
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#sports">Sports</a></li>
+                    <li><a href="#entertainment">Entertainment</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#about">About Us</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Hero Section -->
+        <div class="hero">
+            <h1>Welcome to Tandao Sports and Entertainment</h1>
+            <p>Discover the latest in sports and entertainment from Tandao Television.</p>
+            <a href="#">Learn More</a>
+        </div>
+
+        <!-- Sports Section -->
+        <section id="sports">
+            <h2>Sports</h2>
+            <div id="sports-updates">
+                <!-- Sports updates will be dynamically inserted here -->
+            </div>
+        </section>
+
+        <!-- Entertainment Section -->
+        <section id="entertainment">
+            <h2>Entertainment</h2>
+            <div id="entertainment-updates">
+                <!-- Entertainment updates will be dynamically inserted here -->
+            </div>
+        </section>
+
+        <!-- About Us Section -->
+        <section id="about" class="section">
+            <h2>About Tandao TV &amp; Our Founder</h2>
+            <p>Tandao TV is a dynamic, youth-focused media channel in Kenya offering vibrant programming that bridges the gap between digital innovation and traditional broadcasting. We are driven by a passion to inform, entertain, and empower our audience with relevant, high-quality content in both English and Kiswahili.</p>
+            <p><strong>Meet Our CEO – Robert Wanyonyi</strong><br/>
+            Investigative journalist turned visionary media leader: Robert began his career uncovering stories that matter and seamlessly transitioned into leadership to shape the future of Kenyan media.</p>
+            <p>Founder &amp; Group CEO of Tandao Media Group: He leads with purpose, merging editorial integrity with digital growth to ensure Tandao remains ethically sound, innovative, and audience-centric.</p>
+            <p>Hands-on newsroom presence: Known to visit the newsroom multiple times daily, Robert ensures our reporting stays honest, unbiased, and free from undue influence.</p>
+            <p>Digital-savvy &amp; socially responsible: He highlights the importance of platforms like TikTok, YouTube, and Instagram in youth engagement, while championing responsible use and digital literacy through civic education efforts.</p>
+            <p>International correspondent for Reuters: In a collaboration facilitated by Thomson Reuters, Robert now reports on critical East and Central Africa issues—ranging from regional integration to geopolitical developments—extending Tandao’s reach to global audiences.</p>
+            <p><strong>Why Tandao TV Stands Out</strong><br/>
+            Editorial independence &amp; ethics: Under Robert’s guidance, our newsroom is vigilant against advertiser or government influence, upholding integrity as our core value.</p>
+            <p>Content that resonates: We cater to the digitally connected youth, blending trending online culture with in-depth traditional journalism and storytelling.</p>
+            <p>Community at heart: From our “Shinda Shopping” viewer competition to socially engaging programming, we support our communities and uplift our audiences.</p>
+            <p>In a nutshell: Under Robert Wanyonyi’s leadership, Tandao TV isn’t just another channel—it’s a forward-thinking media platform championing ethical journalism, youth empowerment, and digital engagement. Join us for smart, engaging content that informs, inspires, and uplifts.</p>
+
+            <section id="contact-info" class="section">
+                <h2>Contact Information</h2>
+                <p>You can find us on Instagram: <strong>@tandaotv</strong></p>
+                <p>You can find us on TikTok: <strong>@tandaotv</strong></p>
+                <p>You can find us on YouTube: <strong>@tandaotv</strong></p>
+                <p>You can find us on X (Twitter): <strong>@tandaotv</strong></p>
+            </section>
+        </section>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>&copy; 2025 Tandao Television. All Rights Reserved.</p>
+        </div>
+    </div>
+    <script src="../admin.js"></script>
+    <script>
+        async function fetchUpdates() {
+            try {
+                const response = await fetch('/.netlify/functions/getUpdates');
+                const data = await response.json();
+
+                const sportsContainer = document.getElementById('sports-updates');
+                const entertainmentContainer = document.getElementById('entertainment-updates');
+
+                // Clear existing content
+                sportsContainer.innerHTML = '';
+                entertainmentContainer.innerHTML = '';
+
+                // Render sports updates
+                data.sports.forEach(update => {
+                    const div = document.createElement('div');
+                    div.className = 'update';
+                    div.innerHTML = `
+                        <p>${update.text}</p>
+                        ${update.image ? `<img src="${update.image}" alt="${update.caption || 'Sports Image'}" />` : ''}
+                        ${update.caption ? `<p><em>${update.caption}</em></p>` : ''}
+                    `;
+                    sportsContainer.appendChild(div);
+                });
+
+                // Render entertainment updates
+                data.entertainment.forEach(update => {
+                    const div = document.createElement('div');
+                    div.className = 'update';
+                    div.innerHTML = `
+                        <p>${update.text}</p>
+                        ${update.image ? `<img src="${update.image}" alt="${update.caption || 'Entertainment Image'}" />` : ''}
+                        ${update.caption ? `<p><em>${update.caption}</em></p>` : ''}
+                    `;
+                    entertainmentContainer.appendChild(div);
+                });
+            } catch (error) {
+                console.error('Error fetching updates:', error);
+            }
+        }
+
+        // Fetch updates on page load
+        window.addEventListener('DOMContentLoaded', fetchUpdates);
+    </script>
+</body>
+</html>

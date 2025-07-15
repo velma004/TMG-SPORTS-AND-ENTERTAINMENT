@@ -174,7 +174,7 @@
         // Fetch and render updates from backend API
         async function renderUpdates() {
             try {
-                const response = await fetch('/api/updates');
+                const response = await fetch('/.netlify/functions/getUpdates');
                 const updates = await response.json();
 
                 const sportsContainer = document.getElementById("sports-updates");
