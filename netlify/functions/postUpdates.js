@@ -1,5 +1,7 @@
-const fs = require('fs').promises;
-const path = require('path');
+const fetch = require('node-fetch');
+
+const BIN_ID = '6876d37a2a92ba0befe7afb4'; // Replace with your Bin ID
+const API_KEY = process.env.JSONBIN_API_KEY; // Store your API key in environment variable
 
 exports.handler = async function(event, context) {
   if (event.httpMethod !== 'POST') {
@@ -15,54 +17,56 @@ exports.handler = async function(event, context) {
   }
 
   try {
-    console.log('Received event body:', event.body);
     const data = JSON.parse(event.body);
     const { category, text, image, caption } = data;
 
-    const updatesPath = path.join(__dirname, '..', '..', 'updates.json');
-    let updates;
-
-    // If the request body contains the entire updates object (no category and text), overwrite updates.json
-    if (!category && !text && typeof data === 'object') {
-      updates = data;
-    } else {
-      // Validate required fields for single update
-      if (!category || !text) {
-        console.log('Missing category or text');
-        return {
-          statusCode: 400,
-          body: JSON.stringify({ error: 'Category and text are required' }),
-          headers: {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Headers': 'Content-Type'
-          }
-        };
-      }
-
-      try {
-        const updatesData = await fs.readFile(updatesPath, 'utf-8');
-        updates = JSON.parse(updatesData);
-      } catch (fileReadError) {
-        console.error('Error reading updates.json:', fileReadError);
-        updates = {};
-      }
-
-      if (!updates[category]) {
-        updates[category] = [];
-      }
-
-      updates[category].push({ text, image, caption });
+    if (!category || !text) {
+      return {
+        statusCode: 400,
+        body: JSON.stringify({ error: 'Category and text are required' }),
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Headers': 'Content-Type'
+        }
+      };
     }
 
-    try {
-      await fs.writeFile(updatesPath, JSON.stringify(updates, null, 2), 'utf-8');
-    } catch (fileWriteError) {
-      console.error('Error writing updates.json:', fileWriteError);
-      throw fileWriteError;
+    // Fetch current updates from JSONBin
+    const getResponse = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, {
+      method: 'GET',
+      headers: {
+        'X-Master-Key': API_KEY,
+        'Content-Type': 'application/json'
+      }
+    });
+
+    if (!getResponse.ok) {
+      throw new Error('Failed to fetch current updates');
     }
 
-    console.log('Update saved successfully');
+    const getData = await getResponse.json();
+    let updates = getData.record || {};
+
+    if (!updates[category]) {
+      updates[category] = [];
+    }
+
+    updates[category].push({ text, image, caption });
+
+    // Save updated updates back to JSONBin
+    const putResponse = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
+      method: 'PUT',
+      headers: {
+        'X-Master-Key': API_KEY,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(updates)
+    });
+
+    if (!putResponse.ok) {
+      throw new Error('Failed to save update');
+    }
 
     return {
       statusCode: 200,
@@ -77,7 +81,7 @@ exports.handler = async function(event, context) {
     console.error('Error in postUpdates:', err);
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: err.message || 'Internal Server Error', stack: err.stack }),
+      body: JSON.stringify({ error: err.message || 'Internal Server Error' }),
       headers: {
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*',
